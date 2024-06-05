@@ -45,7 +45,12 @@ if (formSubmit) {
             })
             localStorage.setItem(_PRODUCTS, JSON.stringify(listProduct));
             renderProduct();
-
+            Swal.fire({
+                title: "Thành công?",
+                text: "Bạn đã cập nhật sản phẩm thành công?",
+                icon: "success"
+            })
+            handleResetFormModal()
         } else {
             const id = uuidv4();
             const dataBuilder = {};
@@ -59,6 +64,12 @@ if (formSubmit) {
             listProduct.push(dataBuilder);
             localStorage.setItem(_PRODUCTS, JSON.stringify(listProduct));
             renderProduct();
+            Swal.fire({
+                title: "Thành công?",
+                text: "Bạn đã tạo sản phẩm thành công?",
+                icon: "success"
+            })
+            handleResetFormModal()
         }
     })
 
