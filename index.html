@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="./assets/css/style.css" />
         <script src="./assets/js/main.js" defer></script>
     </head>
+
     <body>
         <div>
             <div class="row vw-100">
@@ -91,7 +92,7 @@
                         <div>
                             <h3 class="fs-5">Danh sách sản phẩm</h3>
                             <div>
-                                <form id="sortForm" class="form-inline">
+                                <form id="sortForm" class="form-inline" action="handle">
                                     <div class="row justify-content-end">
                                         <div class="mb-2 col-1">
                                             <label for="sort" class="mr-2 fs-6" style="font-weight: 600">Lọc:</label>
@@ -113,7 +114,7 @@
                                             <label for="order" class="mr-2 fs-6" style="font-weight: 600"
                                                 >Trạng thái:</label
                                             >
-                                            <select id="status" name="status" class="form-control mr-3">
+                                            <select id="status_choose" name="status_choose" class="form-control mr-3">
                                                 <option value="hidden">ẩn</option>
                                                 <option value="show">hiện</option>
                                             </select>
@@ -149,7 +150,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="" id="form-submit-system">
+                        <form action="handle" id="form-submit-system">
                             <input type="text" hidden name="id" id="input-cache-id" />
                             <div class="row">
                                 <div class="col-6 mb-2">
@@ -165,7 +166,8 @@
                                 </div>
                                 <div class="col-6 mb-2">
                                     <label for="cate" class="form-label">Loại sản phẩm</label>
-                                    <select class="form-control" required name="categories">
+                                    <select class="form-control" id="cate" required name="categories">
+                                        <option value="">Chọn danh mục</option>
                                         <option value="Thời trang trẻ em">Thời trang trẻ em</option>
                                         <option value="Thời trang người lớn">Thời trang người lớn</option>
                                         <option value="Thời trang người trung tuổi">Thời trang người trung tuổi</option>
@@ -173,8 +175,9 @@
                                     </select>
                                 </div>
                                 <div class="col-6 mb-2">
-                                    <label for="cate" class="form-label">Trạng thái</label>
-                                    <select class="form-control" required name="status">
+                                    <label for="status" class="form-label">Trạng thái</label>
+                                    <select class="form-control" id="status" required name="status">
+                                        <option value="">Chọn trạng thái</option>
                                         <option value="hidden">Ngừng kinh doanh</option>
                                         <option value="show">Đang kinh doanh</option>
                                     </select>
