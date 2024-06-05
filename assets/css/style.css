@@ -1,0 +1,92 @@
+.bg-fa {
+    background-color: #fafafa;
+}
+
+.admin-user {
+    border-radius  : 10px;
+    transition     : all linear .4s;
+    display        : flex;
+    justify-content: center;
+
+    &:hover {
+        background: rgba(0, 0, 0, 0.1);
+        cursor    : pointer;
+        color     : #ee4d2d;
+    }
+
+    img {
+        width  : 48px;
+        height : 48px;
+        padding: 10px;
+    }
+
+    span {
+        font-weight: 600;
+    }
+}
+
+.item-side-bar {
+    width          : 70%;
+    height         : 52px;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    margin         : 0 auto;
+    gap            : 6px;
+    font-weight    : 500;
+    color          : #141414;
+    font-size      : 15px;
+
+    &.active {
+        font-weight: 600;
+    }
+
+    &:hover {
+        cursor   : pointer;
+        transform: translateY(-2px);
+    }
+}
+
+.discount {
+    text-decoration: line-through;
+    font-weight    : 600;
+    color          : #ee4d2d;
+    font-size      : 18px;
+}
+
+.price-discount {
+    font-weight: 600;
+    color      : #ee4d2d;
+    font-size  : 20px;
+}
+
+.divider {
+    width        : 80%;
+    margin       : 0 auto;
+    height       : 1px;
+    border-radius: 999999px;
+    background   : #ddd;
+}
+
+.img-card-item {
+    width     : 100%;
+    height    : 100%;
+    transition: all linear .2s;
+    object-fit: cover;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.title-product {
+    display           : -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow          : hidden;
+}
+
+a.active {
+    background: rgb(73, 73, 226);
+    color     : #fff;
+}
