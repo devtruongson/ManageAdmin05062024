@@ -102,15 +102,19 @@ function renderProduct() {
                                 style="border-top: 1px solid #ddd"
                                 class="mt-2 d-flex justify-content-center gap-3 align-items-center pt-3"
                             >
-                                <button
-                                    class="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modal-app"
-                                    onclick="handleUpdate('${product.id}')"
-                                >
-                                    Sửa
-                                </button>
-                                <button data-action="xóa" onclick="handleDelete('${product.id}')" class="btn btn-warning">Xóa</button>
+                                ${product.status === "show" ? `
+                                    <button
+                                        class="btn btn-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modal-app"
+                                        onclick="handleUpdate('${product.id}')"
+                                    >
+                                        Sửa
+                                    </button>
+                                    <button data-action="xóa" onclick="handleDelete('${product.id}')" class="btn btn-warning">Xóa</button>`
+                        : `
+                                    <button  onclick="handleRestore('${product.id}')" class="btn btn-warning">Khôi phục</button>
+                                `}
                             </div>
                         </div>
                     </div>
@@ -173,7 +177,50 @@ function renderProduct() {
 
 function handleResetFormModal() {
     modalTitle.innerText = "Thêm sản phẩm";
+    btnHandler.innerText = "Tạo sản phẩm";
     formSubmit && formSubmit.reset();
+}
+
+function handleRestore(id) {
+    if (!id) {
+        Swal.fire({
+            title: "Nguy hiểm?",
+            text: "Có lỗi xảy ra không thể lấy ID?",
+            icon: "warning"
+        })
+        return;
+    }
+    Swal.fire({
+        title: "Nguy hiểm?",
+        text: "Bạn chắc chắn muốn khôi phục sản phẩm này chứ?",
+        icon: "question",
+        showCancelButton: true,
+        showConfirmButton: true
+    }).then(res => {
+        if (res.isConfirmed) {
+            if (!id) {
+                Swal.fire({
+                    title: "Nguy hiểm?",
+                    text: "Có lỗi xảy ra không thể lấy ID?",
+                    icon: "warning"
+                })
+            } else {
+                let listProduct = JSON.parse(localStorage.getItem(_PRODUCTS));
+                listProduct = listProduct.map(product => {
+                    if (product.id === id) {
+                        return {
+                            ...product,
+                            status: "show"
+                        };
+                    } else {
+                        return product;
+                    }
+                })
+                localStorage.setItem(_PRODUCTS, JSON.stringify(listProduct));
+                renderProduct();
+            }
+        }
+    })
 }
 
 function handlePagination() {
@@ -250,3 +297,15 @@ function validateVND(vnd) {
     vnd = +vnd;
     return vnd.toLocaleString("it-IT", { style: "currency", currency: "VND" });
 }
+
+document.getElementById('sortForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const sort = document.getElementById('sort').value;
+    const order = document.getElementById('order').value;
+    const num = document.getElementById('num').value;
+    const status = document.getElementById('status').value;
+
+    const queryString = `?sort=${sort}&order=${order}&status=${status}&num=${num}`;
+    console.log(queryString);
+    history.pushState(null, '', queryString);
+});
